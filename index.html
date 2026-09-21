@@ -439,7 +439,7 @@
 
     document.getElementById('reset-btn').addEventListener('click', () => {
       drawPlaceholder();
-      document.getElementById('file-input').value = '';
+      { const _el = document.getElementById('file-input'); if (_el) _el.value = ''; }
     });
 
     function showToast() {
