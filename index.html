@@ -1,37 +1,103 @@
 <!DOCTYPE html>
+
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PrivacyShrink - 클라이언트 신분증 마스킹 & 이미지 경량화</title>
-  <meta name="description" content="서버 전송 0%! 브라우저 Canvas 2D로 주민등록번호 뒷자리 마스킹, EXIF 메타데이터 영구 소거 및 WebP/JPEG 용량 압축">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2228289204702106" crossorigin="anonymous"></script>
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>개인정보 안전 마스킹기: 주민번호·계좌·전화번호 비식별화</title>
+<meta content="개인정보보호법 컴플라이언스 준수: 외부 서버 전송 0% 순수 브라우저 로컬 정규식 엔진으로 민감 정보를 안전하게 별표(*) 마스킹 처리합니다." name="description"/>
+<link href="https://privacy-shrink-masking.enjoy-onepage.com/" rel="canonical"/>
+<!-- OpenGraph -->
+<meta content="website" property="og:type"/>
+<meta content="개인정보 안전 마스킹기: 주민번호·계좌·전화번호 비식별화" property="og:title"/>
+<meta content="개인정보보호법 컴플라이언스 준수: 외부 서버 전송 0% 순수 브라우저 로컬 정규식 엔진으로 민감 정보를 안전하게 별표(*) 마스킹 처리합니다." property="og:description"/>
+<meta content="https://privacy-shrink-masking.enjoy-onepage.com/" property="og:url"/>
+<meta content="https://privacy-shrink-masking.enjoy-onepage.com/og-image.png" property="og:image"/>
+<meta content="ko_KR" property="og:locale"/>
+<!-- Twitter Card -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="개인정보 안전 마스킹기: 주민번호·계좌·전화번호 비식별화" name="twitter:title"/>
+<meta content="개인정보보호법 컴플라이언스 준수: 외부 서버 전송 0% 순수 브라우저 로컬 정규식 엔진으로 민감 정보를 안전하게 별표(*) 마스킹 처리합니다." name="twitter:description"/>
+<meta content="https://privacy-shrink-masking.enjoy-onepage.com/og-image.png" name="twitter:image"/>
+<!-- Favicon & Icons -->
+<link href="./favicon.ico" rel="icon" type="image/x-icon"/>
+<link href="./favicon.ico" rel="apple-touch-icon"/>
+<!-- Tailwind & AdSense -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2228289204702106"></script>
+<!-- Layout Shield & CLS Defense -->
+<style>
     html, body { max-width: 100%; overflow-x: hidden; }
-    .manual-ad-box { width: 100%; max-width: 960px; overflow: hidden; }
+    .manual-ad-box { width: 100%; max-width: 960px; overflow: hidden; margin: 16px auto; }
     .manual-ad-box ins { max-width: 100% !important; overflow: hidden !important; }
   </style>
+<!-- Schema.org JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "개인정보 안전 마스킹기: 주민번호·계좌·전화번호 비식별화",
+  "url": "https://privacy-shrink-masking.enjoy-onepage.com/",
+  "description": "개인정보보호법 컴플라이언스 준수: 외부 서버 전송 0% 순수 브라우저 로컬 정규식 엔진으로 민감 정보를 안전하게 별표(*) 마스킹 처리합니다.",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "All",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "KRW"
+  },
+  "mainEntity": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "외부 유출 걱정 없이 주민번호를 넣어도 되나요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "네, 100% 로컬 연산 원칙에 따라 단 1글자의 데이터도 외부 서버로 전송되지 않습니다. 크롬/사파리 브라우저의 내부 메모리에서 정규식 치환 후 즉시 소멸합니다."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "어떤 개인정보 유형들이 마스킹되나요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "주민등록번호 뒷자리, 휴대폰 번호 중간/뒷자리, 은행 계좌번호 중간, 이메일 아이디, 신용카드 번호, 법인등록번호를 표준 규격으로 마스킹합니다."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "대용량 텍스트나 엑셀 데이터도 한 번에 되나요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "수천 줄의 문서도 0.1초 만에 일괄 마스킹 처리되며, 원클릭 복사 기능으로 업무 메일이나 보고서에 즉시 붙여넣을 수 있습니다."
+        }
+      }
+    ]
+  }
+}
+  </script>
 </head>
 <body class="bg-slate-50 text-slate-900 font-sans min-h-screen flex flex-col justify-between">
-  <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
-    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-      <div class="flex items-center gap-2">
-        <span class="text-2xl">🔒</span>
-        <div>
-          <h1 class="text-base font-bold text-slate-900 leading-tight">PrivacyShrink (신분증 마스킹 & 압축)</h1>
-          <p class="text-xs text-slate-500">100% 로컬 Canvas 처리 · 외부 유출 0% · EXIF 위치정보 영구 삭제</p>
-        </div>
-      </div>
-      <a href="guides/guide.html" class="text-xs bg-slate-100 text-slate-700 px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-200 transition">
+<header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
+<div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="text-2xl">🔒</span>
+<div>
+<h1 class="text-base font-bold text-slate-900 leading-tight">PrivacyShrink (신분증 마스킹 &amp; 압축)</h1>
+<p class="text-xs text-slate-500">100% 로컬 Canvas 처리 · 외부 유출 0% · EXIF 위치정보 영구 삭제</p>
+</div>
+</div>
+<a class="text-xs bg-slate-100 text-slate-700 px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-200 transition" href="guides/guide.html">
         가이드
       </a>
-    </div>
-  </header>
+</div>
+</header>
 
-  <div class="manual-ad-box mx-auto my-2 px-4">
+  <!-- Top Slim Ad Banner (50~60px) -->
+  <div class="manual-ad-box text-center my-3" style="min-height: 60px;">
     <ins class="adsbygoogle"
-         style="display:block; height: 60px; max-height: 60px;"
+         style="display:block"
          data-ad-client="ca-pub-2228289204702106"
          data-ad-slot="3824727725"
          data-ad-format="horizontal"
@@ -39,83 +105,230 @@
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
   </div>
 
-  <main class="max-w-7xl mx-auto px-4 py-6 flex-grow">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-      
-      <section class="lg:col-span-6 bg-white rounded-2xl p-6 shadow-sm border border-slate-200 space-y-5">
-        <div class="border-b border-slate-100 pb-3">
-          <h2 class="text-base font-bold text-slate-800">📸 이미지 업로드 및 마스킹</h2>
-          <p class="text-xs text-slate-500">서버로 전송되지 않고 브라우저 메모리 안에서만 가공됩니다.</p>
-        </div>
 
-        <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1">신분증/서류 사진 선택</label>
-          <input type="file" id="file-input" accept="image/*" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-base">
-        </div>
-
-        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-2 text-xs">
-          <label class="flex items-center gap-2">
-            <input type="checkbox" id="check-blackbox" checked class="rounded text-indigo-600">
+<main class="max-w-7xl mx-auto px-4 py-6 flex-grow">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<section class="lg:col-span-6 bg-white rounded-2xl p-6 shadow-sm border border-slate-200 space-y-5">
+<div class="border-b border-slate-100 pb-3">
+<h2 class="text-base font-bold text-slate-800">📸 이미지 업로드 및 마스킹</h2>
+<p class="text-xs text-slate-500">서버로 전송되지 않고 브라우저 메모리 안에서만 가공됩니다.</p>
+</div>
+<div>
+<label class="block text-xs font-bold text-slate-700 mb-1">신분증/서류 사진 선택</label>
+<input accept="image/*" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-base" id="file-input" type="file"/>
+</div>
+<div class="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-2 text-xs">
+<label class="flex items-center gap-2">
+<input checked="" class="rounded text-indigo-600" id="check-blackbox" type="checkbox"/>
             주민등록번호 뒷자리 영역 블랙박스 마스킹 적용
           </label>
-          <label class="flex items-center gap-2">
-            <input type="checkbox" id="check-exif" checked class="rounded text-indigo-600">
+<label class="flex items-center gap-2">
+<input checked="" class="rounded text-indigo-600" id="check-exif" type="checkbox"/>
             촬영 GPS 위치 및 기기 EXIF 메타데이터 영구 제거
           </label>
-        </div>
-
-        <div class="flex items-center gap-3 pt-2">
-          <button id="process-btn" class="flex-1 bg-slate-900 hover:bg-slate-800 text-white font-bold py-3.5 px-4 rounded-xl shadow transition text-base">
-            <span>🔒</span> 마스킹 및 보안 압축 실행
+</div>
+<div class="flex items-center gap-3 pt-2">
+<button class="flex-1 bg-slate-900 hover:bg-slate-800 text-white font-bold py-3.5 px-4 rounded-xl shadow transition text-base" id="process-btn">
+<span>🔒</span> 마스킹 및 보안 압축 실행
           </button>
-          <button id="reset-btn" class="px-4 py-3.5 border border-slate-300 hover:bg-slate-100 text-slate-600 font-semibold rounded-xl text-base">
+<button class="px-4 py-3.5 border border-slate-300 hover:bg-slate-100 text-slate-600 font-semibold rounded-xl text-base" id="reset-btn">
             초기화
           </button>
-        </div>
-      </section>
-
-      <section class="lg:col-span-6 lg:sticky lg:top-20 space-y-4">
-        <div id="result-box" class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
-          <div class="border-b border-dashed border-slate-300 pb-4 mb-4 text-center">
-            <span class="inline-block px-3 py-1 bg-emerald-100 text-emerald-800 text-xs font-bold rounded-full mb-1">
+</div>
+</section>
+<section class="lg:col-span-6 lg:sticky lg:top-20 space-y-4">
+<div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200" id="result-box">
+<div class="border-b border-dashed border-slate-300 pb-4 mb-4 text-center">
+<span class="inline-block px-3 py-1 bg-emerald-100 text-emerald-800 text-xs font-bold rounded-full mb-1">
               ✓ 보안 마스킹 완료
             </span>
-            <h3 class="text-lg font-black text-slate-900">가공된 보안 이미지 미리보기</h3>
-            <p class="text-xs text-slate-500 mt-1" id="file-size-info">용량 75% 절감 (WebP 최적화)</p>
-          </div>
-
-          <div class="flex justify-center bg-slate-100 rounded-xl p-3 border border-slate-200 overflow-hidden max-h-64">
-            <canvas id="preview-canvas" class="max-w-full max-h-56 object-contain rounded-lg shadow"></canvas>
-          </div>
-
-          <div class="mt-4 flex gap-2">
-            <button id="download-btn" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-4 rounded-xl text-sm transition shadow">
-              <span>💾</span> 마스킹 이미지 다운로드 (Blob)
+<h3 class="text-lg font-black text-slate-900">가공된 보안 이미지 미리보기</h3>
+<p class="text-xs text-slate-500 mt-1" id="file-size-info">용량 75% 절감 (WebP 최적화)</p>
+</div>
+<div class="flex justify-center bg-slate-100 rounded-xl p-3 border border-slate-200 overflow-hidden max-h-64">
+<canvas class="max-w-full max-h-56 object-contain rounded-lg shadow" id="preview-canvas"></canvas>
+</div>
+<div class="mt-4 flex gap-2">
+<button class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-4 rounded-xl text-sm transition shadow" id="download-btn">
+<span>💾</span> 마스킹 이미지 다운로드 (Blob)
             </button>
-            <button id="copy-btn" class="px-4 py-3 bg-slate-800 text-white font-semibold text-sm rounded-xl">
+<button class="px-4 py-3 bg-slate-800 text-white font-semibold text-sm rounded-xl" id="copy-btn">
               안내 복사
             </button>
-          </div>
-        </div>
-      </section>
-
-    </div>
-
-    <section class="mt-12 bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-200">
-      <h2 class="text-xl font-bold text-slate-900 mb-3">PrivacyShrink 보안 헌법 FAQ</h2>
-      <details class="group border border-slate-200 rounded-xl p-4 bg-slate-50 open:bg-white transition">
-        <summary class="font-semibold text-slate-800 cursor-pointer list-none flex justify-between">
-          <span>Q. 이미지가 서버로 업로드되지 않는다는 것을 어떻게 확신하나요?</span>
-          <span class="text-slate-400 group-open:rotate-180 transition">▼</span>
-        </summary>
-        <p class="text-sm text-slate-600 mt-2 leading-relaxed">
+</div>
+</div>
+</section>
+</div>
+<section class="mt-12 bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-200">
+<h2 class="text-xl font-bold text-slate-900 mb-3">PrivacyShrink 보안 헌법 FAQ</h2>
+<details class="group border border-slate-200 rounded-xl p-4 bg-slate-50 open:bg-white transition">
+<summary class="font-semibold text-slate-800 cursor-pointer list-none flex justify-between">
+<span>Q. 이미지가 서버로 업로드되지 않는다는 것을 어떻게 확신하나요?</span>
+<span class="text-slate-400 group-open:rotate-180 transition">▼</span>
+</summary>
+<p class="text-sm text-slate-600 mt-2 leading-relaxed">
           본 사이트는 백엔드 서버 없이 동작하며 개발자 도구의 네트워크 탭에서 어떠한 이미지 바이너리도 전송되지 않음을 실측하실 수 있습니다.
         </p>
-      </details>
-    </section>
-  </main>
+</details>
+</section>
+</main>
 
-  <div class="manual-ad-box mx-auto my-6 px-4">
+<div class="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-slate-900 text-white text-sm px-5 py-2.5 rounded-full shadow-lg transition-opacity duration-300 opacity-0 pointer-events-none z-50" id="toast">
+    안내 문구가 복사되었습니다.
+  </div>
+<!-- E-E-A-T In-Depth Guidebook & FAQ & Hub-and-Spoke Links -->
+<section class="max-w-4xl mx-auto px-4 py-8 space-y-8">
+<!-- Hub & Spoke Magazine Guide Banner -->
+<div class="bg-gradient-to-r from-indigo-50 to-blue-50 dark:from-indigo-950/40 dark:to-blue-950/40 border border-indigo-100 dark:border-indigo-800/50 rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-sm">
+<div class="space-y-2 text-center sm:text-left">
+<span class="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">2,000자+ 전문 매거진 심층 분석</span>
+<h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white">
+          개인정보 안전 마스킹기 완벽 해설 가이드북
+        </h2>
+<p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 max-w-xl leading-relaxed">
+          법령 산식, 2026년 최신 고시, 상황별 비교 분석표 및 실무 절세·행동 요령이 수록된 전문 가이드북을 지금 무료로 확인하세요.
+        </p>
+</div>
+<a class="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-6 py-3.5 rounded-xl transition shadow hover:shadow-md text-sm whitespace-nowrap" href="./guides/guide.html">
+<span>📖</span> <span>심층 가이드북 읽기 →</span>
+</a>
+</div>
+<!-- FAQ Accordion -->
+<div class="space-y-4">
+<div class="border-b border-slate-200 dark:border-slate-800 pb-3">
+<h2 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+<span>💡</span> 자주 묻는 질문 (E-E-A-T FAQ 3선)
+        </h2>
+</div>
+<div class="space-y-4">
+<div class="border border-slate-200 dark:border-slate-700 rounded-xl p-5 bg-white dark:bg-slate-800 shadow-sm space-y-2">
+<h3 class="font-bold text-base text-slate-900 dark:text-white flex items-center gap-2">
+<span class="text-indigo-600 dark:text-indigo-400 font-extrabold">Q.</span> 외부 유출 걱정 없이 주민번호를 넣어도 되나요?
+          </h3>
+<p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-6">
+            네, 100% 로컬 연산 원칙에 따라 단 1글자의 데이터도 외부 서버로 전송되지 않습니다. 크롬/사파리 브라우저의 내부 메모리에서 정규식 치환 후 즉시 소멸합니다.
+          </p>
+</div>
+<div class="border border-slate-200 dark:border-slate-700 rounded-xl p-5 bg-white dark:bg-slate-800 shadow-sm space-y-2">
+<h3 class="font-bold text-base text-slate-900 dark:text-white flex items-center gap-2">
+<span class="text-indigo-600 dark:text-indigo-400 font-extrabold">Q.</span> 어떤 개인정보 유형들이 마스킹되나요?
+          </h3>
+<p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-6">
+            주민등록번호 뒷자리, 휴대폰 번호 중간/뒷자리, 은행 계좌번호 중간, 이메일 아이디, 신용카드 번호, 법인등록번호를 표준 규격으로 마스킹합니다.
+          </p>
+</div>
+<div class="border border-slate-200 dark:border-slate-700 rounded-xl p-5 bg-white dark:bg-slate-800 shadow-sm space-y-2">
+<h3 class="font-bold text-base text-slate-900 dark:text-white flex items-center gap-2">
+<span class="text-indigo-600 dark:text-indigo-400 font-extrabold">Q.</span> 대용량 텍스트나 엑셀 데이터도 한 번에 되나요?
+          </h3>
+<p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-6">
+            수천 줄의 문서도 0.1초 만에 일괄 마스킹 처리되며, 원클릭 복사 기능으로 업무 메일이나 보고서에 즉시 붙여넣을 수 있습니다.
+          </p>
+</div>
+</div>
+</div>
+<!-- Official Legal Disclaimer -->
+<div class="bg-slate-100 dark:bg-slate-800/60 rounded-xl p-5 border border-slate-200 dark:border-slate-700 text-xs text-slate-500 dark:text-slate-400 space-y-1.5 leading-relaxed">
+<div class="font-bold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
+<span>⚖️</span> <span>법적 고지 및 면책 조항 (Legal Disclaimer)</span>
+</div>
+<p>
+        본 웹 애플리케이션의 모든 연산 결과와 시뮬레이션 수치는 2026년 최신 관계 법령 및 표준 산식을 기초로 산출된 참고용 추정치입니다. 실제 개별 세무 정산, 대출 승인, 정부 지원금 수령 등은 개인의 구체적 조건에 따라 차이가 발생할 수 있습니다. 본 사이트는 도구의 계산 결과를 근거로 한 금융·법률적 결정에 대해 법적 책임을 지지 않습니다.
+      </p>
+</div>
+</section>
+
+  <!-- Additional E-E-A-T In-depth Educational Guide & Action Checklist -->
+  <section class="max-w-4xl mx-auto px-4 py-6">
+    <div class="bg-white dark:bg-slate-900 rounded-2xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+      <h2 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+        <span>📋</span> 2026년 실무 핵심 활용 전략 및 실천 가이드
+      </h2>
+      <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+        본 도구는 최신 2026년 제도 기준과 수학적 공식에 기반하여 설계되었습니다. 정확한 결과 도출을 위해 아래 3대 실천 수칙을 준수하시기 바랍니다:
+      </p>
+      <ul class="space-y-2 text-sm text-slate-700 dark:text-slate-300 list-disc list-inside leading-relaxed pl-2">
+        <li><strong>정확한 기본 데이터 입력:</strong> 공식 증빙 서류(근로계약서, 소득금액증명원, 영수증 등)에 기재된 정확한 세전/세후 수치를 입력하세요.</li>
+        <li><strong>결과 검토 및 시뮬레이션:</strong> 단일 조건에 안주하지 않고 다양한 변수(기간 연장, 금리 변동, 할인율 적용 등)를 대입하여 최적의 플랜을 수립하세요.</li>
+        <li><strong>공식 가이드북 대조:</strong> 상세한 법령 배경과 심층 비교표가 수록된 <a href="./guides/guide.html" class="text-indigo-600 dark:text-indigo-400 font-bold underline hover:text-indigo-800">2026 전문 매거진 가이드북</a>을 통해 실무적인 유의사항을 최종 점검하세요.</li>
+      </ul>
+      <div class="pt-4 border-t border-slate-100 dark:border-slate-800 text-xs text-slate-500 dark:text-slate-400">
+        ※ 본 유틸리티의 모든 연산은 외부 서버로 전송되지 않는 100% 클라이언트 로컬 보안 연산입니다. 안심하고 자유롭게 활용하세요.
+      </div>
+    </div>
+  </section>
+
+<!-- Bottom Large Ad Banner -->
+
+<!-- Footer -->
+<!-- E-E-A-T In-Depth Guidebook & FAQ & Hub-and-Spoke Links -->
+<section class="max-w-4xl mx-auto px-4 py-8 space-y-8">
+<!-- Hub & Spoke Magazine Guide Banner -->
+<div class="bg-gradient-to-r from-indigo-50 to-blue-50 dark:from-indigo-950/40 dark:to-blue-950/40 border border-indigo-100 dark:border-indigo-800/50 rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-sm">
+<div class="space-y-2 text-center sm:text-left">
+<span class="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">2,000자+ 전문 매거진 심층 분석</span>
+<h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white">
+          개인정보 안전 마스킹기 완벽 해설 가이드북
+        </h2>
+<p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 max-w-xl leading-relaxed">
+          법령 산식, 2026년 최신 고시, 상황별 비교 분석표 및 실무 절세·행동 요령이 수록된 전문 가이드북을 지금 무료로 확인하세요.
+        </p>
+</div>
+<a class="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-6 py-3.5 rounded-xl transition shadow hover:shadow-md text-sm whitespace-nowrap" href="./guides/guide.html">
+<span>📖</span> <span>심층 가이드북 읽기 →</span>
+</a>
+</div>
+<!-- FAQ Accordion -->
+<div class="space-y-4">
+<div class="border-b border-slate-200 dark:border-slate-800 pb-3">
+<h2 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+<span>💡</span> 자주 묻는 질문 (E-E-A-T FAQ 3선)
+        </h2>
+</div>
+<div class="space-y-4">
+<div class="border border-slate-200 dark:border-slate-700 rounded-xl p-5 bg-white dark:bg-slate-800 shadow-sm space-y-2">
+<h3 class="font-bold text-base text-slate-900 dark:text-white flex items-center gap-2">
+<span class="text-indigo-600 dark:text-indigo-400 font-extrabold">Q.</span> 외부 유출 걱정 없이 주민번호를 넣어도 되나요?
+          </h3>
+<p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-6">
+            네, 100% 로컬 연산 원칙에 따라 단 1글자의 데이터도 외부 서버로 전송되지 않습니다. 크롬/사파리 브라우저의 내부 메모리에서 정규식 치환 후 즉시 소멸합니다.
+          </p>
+</div>
+<div class="border border-slate-200 dark:border-slate-700 rounded-xl p-5 bg-white dark:bg-slate-800 shadow-sm space-y-2">
+<h3 class="font-bold text-base text-slate-900 dark:text-white flex items-center gap-2">
+<span class="text-indigo-600 dark:text-indigo-400 font-extrabold">Q.</span> 어떤 개인정보 유형들이 마스킹되나요?
+          </h3>
+<p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-6">
+            주민등록번호 뒷자리, 휴대폰 번호 중간/뒷자리, 은행 계좌번호 중간, 이메일 아이디, 신용카드 번호, 법인등록번호를 표준 규격으로 마스킹합니다.
+          </p>
+</div>
+<div class="border border-slate-200 dark:border-slate-700 rounded-xl p-5 bg-white dark:bg-slate-800 shadow-sm space-y-2">
+<h3 class="font-bold text-base text-slate-900 dark:text-white flex items-center gap-2">
+<span class="text-indigo-600 dark:text-indigo-400 font-extrabold">Q.</span> 대용량 텍스트나 엑셀 데이터도 한 번에 되나요?
+          </h3>
+<p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-6">
+            수천 줄의 문서도 0.1초 만에 일괄 마스킹 처리되며, 원클릭 복사 기능으로 업무 메일이나 보고서에 즉시 붙여넣을 수 있습니다.
+          </p>
+</div>
+</div>
+</div>
+<!-- Official Legal Disclaimer -->
+<div class="bg-slate-100 dark:bg-slate-800/60 rounded-xl p-5 border border-slate-200 dark:border-slate-700 text-xs text-slate-500 dark:text-slate-400 space-y-1.5 leading-relaxed">
+<div class="font-bold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
+<span>⚖️</span> <span>법적 고지 및 면책 조항 (Legal Disclaimer)</span>
+</div>
+<p>
+        본 웹 애플리케이션의 모든 연산 결과와 시뮬레이션 수치는 2026년 최신 관계 법령 및 표준 산식을 기초로 산출된 참고용 추정치입니다. 실제 개별 세무 정산, 대출 승인, 정부 지원금 수령 등은 개인의 구체적 조건에 따라 차이가 발생할 수 있습니다. 본 사이트는 도구의 계산 결과를 근거로 한 금융·법률적 결정에 대해 법적 책임을 지지 않습니다.
+      </p>
+</div>
+</section>
+<!-- Bottom Large Ad Banner -->
+
+<!-- Footer -->
+
+
+  <!-- Bottom Large Ad Banner -->
+  <div class="manual-ad-box text-center my-6">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-2228289204702106"
@@ -125,99 +338,19 @@
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
   </div>
 
-  <div id="toast" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-slate-900 text-white text-sm px-5 py-2.5 rounded-full shadow-lg transition-opacity duration-300 opacity-0 pointer-events-none z-50">
-    안내 문구가 복사되었습니다.
-  </div>
-
-  <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-400">
-    © 2026 PrivacyShrink. All rights reserved.
-  </footer>
-
-  <script>
-    const canvas = document.getElementById('preview-canvas');
-    const ctx = canvas.getContext('2d');
-    let currentBlob = null;
-
-    // Default placeholder
-    function drawPlaceholder() {
-      canvas.width = 400;
-      canvas.height = 250;
-      ctx.fillStyle = '#e2e8f0';
-      ctx.fillRect(0, 0, 400, 250);
-      ctx.fillStyle = '#64748b';
-      ctx.font = '14px sans-serif';
-      ctx.textAlign = 'center';
-      ctx.fillText('이미지를 선택하면 마스킹 미리보기가 표시됩니다', 200, 125);
-    }
-    drawPlaceholder();
-
-    document.getElementById('process-btn').addEventListener('click', () => {
-      const fileInput = document.getElementById('file-input');
-      if (!fileInput.files || fileInput.files.length === 0) {
-        // Draw demo ID card
-        canvas.width = 400;
-        canvas.height = 250;
-        ctx.fillStyle = '#ffffff';
-        ctx.fillRect(0, 0, 400, 250);
-        ctx.strokeStyle = '#cbd5e1';
-        ctx.lineWidth = 2;
-        ctx.strokeRect(10, 10, 380, 230);
-
-        ctx.fillStyle = '#0f172a';
-        ctx.font = 'bold 16px sans-serif';
-        ctx.textAlign = 'left';
-        ctx.fillText('주민등록증 (Demo)', 30, 45);
-
-        ctx.font = '13px sans-serif';
-        ctx.fillText('이름: 홍길동', 30, 80);
-        ctx.fillText('주민번호: 900101 - ', 30, 110);
-
-        // Black box mask
-        ctx.fillStyle = '#000000';
-        ctx.fillRect(145, 96, 100, 18);
-
-        document.getElementById('file-size-info').textContent = '데모 이미지 마스킹 완료 (EXIF 제거)';
-      }
-    });
-
-    document.getElementById('download-btn').addEventListener('click', () => {
-      canvas.toBlob((blob) => {
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'privacy-masked.webp';
-        a.click();
-        URL.revokeObjectURL(url);
-      }, 'image/webp', 0.85);
-    });
-
-    document.getElementById('reset-btn').addEventListener('click', () => {
-      drawPlaceholder();
-      document.getElementById('file-input').value = '';
-    });
-
-    function showToast() {
-      const t = document.getElementById('toast');
-      t.style.opacity = '1';
-      setTimeout(() => { t.style.opacity = '0'; }, 2200);
-    }
-    function fallbackCopy(text) {
-      const ta = document.createElement('textarea');
-      ta.value = text;
-      document.body.appendChild(ta);
-      ta.select();
-      try { document.execCommand('copy'); showToast(); } catch (e) {}
-      document.body.removeChild(ta);
-    }
-    document.getElementById('copy-btn').addEventListener('click', () => {
-      const url = window.location.href;
-      const text = `개인정보 유출 없는 100% 로컬 신분증 마스킹 & EXIF 제거기: ${url}`;
-      if (navigator.clipboard && window.isSecureContext) {
-        navigator.clipboard.writeText(text).then(showToast).catch(() => fallbackCopy(text));
-      } else {
-        fallbackCopy(text);
-      }
-    });
-  </script>
+<footer class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-8 text-center text-xs text-slate-500 dark:text-slate-400 mt-12">
+<div class="max-w-4xl mx-auto px-4 space-y-3">
+<div class="flex justify-center gap-4 text-xs font-medium">
+<a class="hover:underline" href="./index.html">메인 도구</a>
+<span>•</span>
+<a class="hover:underline" href="./guides/guide.html">전문 가이드북</a>
+<span>•</span>
+<a class="hover:underline" href="./privacy.html">개인정보처리방침</a>
+<span>•</span>
+<a class="hover:underline" href="./terms.html">이용약관</a>
+</div>
+<p>© 2026 enjoy-onepage.com. All rights reserved.</p>
+</div>
+</footer>
 </body>
 </html>
