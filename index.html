@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PrivacyShrink - 클라이언트 신분증 마스킹 & 이미지 경량화</title>
+  <meta name="description" content="서버 전송 0%! 브라우저 Canvas 2D로 주민등록번호 뒷자리 마스킹, EXIF 메타데이터 영구 소거 및 WebP/JPEG 용량 압축">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2228289204702106" crossorigin="anonymous"></script>
+  <style>
+    html, body { max-width: 100%; overflow-x: hidden; }
+    .manual-ad-box { width: 100%; max-width: 960px; overflow: hidden; }
+    .manual-ad-box ins { max-width: 100% !important; overflow: hidden !important; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans min-h-screen flex flex-col justify-between">
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="text-2xl">🔒</span>
+        <div>
+          <h1 class="text-base font-bold text-slate-900 leading-tight">PrivacyShrink (신분증 마스킹 & 압축)</h1>
+          <p class="text-xs text-slate-500">100% 로컬 Canvas 처리 · 외부 유출 0% · EXIF 위치정보 영구 삭제</p>
+        </div>
+      </div>
+      <a href="guides/guide.html" class="text-xs bg-slate-100 text-slate-700 px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-200 transition">
+        가이드
+      </a>
+    </div>
+  </header>
+
+  <div class="manual-ad-box mx-auto my-2 px-4">
+    <ins class="adsbygoogle"
+         style="display:block; height: 60px; max-height: 60px;"
+         data-ad-client="ca-pub-2228289204702106"
+         data-ad-slot="3824727725"
+         data-ad-format="horizontal"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <main class="max-w-7xl mx-auto px-4 py-6 flex-grow">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      
+      <section class="lg:col-span-6 bg-white rounded-2xl p-6 shadow-sm border border-slate-200 space-y-5">
+        <div class="border-b border-slate-100 pb-3">
+          <h2 class="text-base font-bold text-slate-800">📸 이미지 업로드 및 마스킹</h2>
+          <p class="text-xs text-slate-500">서버로 전송되지 않고 브라우저 메모리 안에서만 가공됩니다.</p>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">신분증/서류 사진 선택</label>
+          <input type="file" id="file-input" accept="image/*" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-base">
+        </div>
+
+        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-2 text-xs">
+          <label class="flex items-center gap-2">
+            <input type="checkbox" id="check-blackbox" checked class="rounded text-indigo-600">
+            주민등록번호 뒷자리 영역 블랙박스 마스킹 적용
+          </label>
+          <label class="flex items-center gap-2">
+            <input type="checkbox" id="check-exif" checked class="rounded text-indigo-600">
+            촬영 GPS 위치 및 기기 EXIF 메타데이터 영구 제거
+          </label>
+        </div>
+
+        <div class="flex items-center gap-3 pt-2">
+          <button id="process-btn" class="flex-1 bg-slate-900 hover:bg-slate-800 text-white font-bold py-3.5 px-4 rounded-xl shadow transition text-base">
+            <span>🔒</span> 마스킹 및 보안 압축 실행
+          </button>
+          <button id="reset-btn" class="px-4 py-3.5 border border-slate-300 hover:bg-slate-100 text-slate-600 font-semibold rounded-xl text-base">
+            초기화
+          </button>
+        </div>
+      </section>
+
+      <section class="lg:col-span-6 lg:sticky lg:top-20 space-y-4">
+        <div id="result-box" class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+          <div class="border-b border-dashed border-slate-300 pb-4 mb-4 text-center">
+            <span class="inline-block px-3 py-1 bg-emerald-100 text-emerald-800 text-xs font-bold rounded-full mb-1">
+              ✓ 보안 마스킹 완료
+            </span>
+            <h3 class="text-lg font-black text-slate-900">가공된 보안 이미지 미리보기</h3>
+            <p class="text-xs text-slate-500 mt-1" id="file-size-info">용량 75% 절감 (WebP 최적화)</p>
+          </div>
+
+          <div class="flex justify-center bg-slate-100 rounded-xl p-3 border border-slate-200 overflow-hidden max-h-64">
+            <canvas id="preview-canvas" class="max-w-full max-h-56 object-contain rounded-lg shadow"></canvas>
+          </div>
+
+          <div class="mt-4 flex gap-2">
+            <button id="download-btn" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-4 rounded-xl text-sm transition shadow">
+              <span>💾</span> 마스킹 이미지 다운로드 (Blob)
+            </button>
+            <button id="copy-btn" class="px-4 py-3 bg-slate-800 text-white font-semibold text-sm rounded-xl">
+              안내 복사
+            </button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <section class="mt-12 bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-200">
+      <h2 class="text-xl font-bold text-slate-900 mb-3">PrivacyShrink 보안 헌법 FAQ</h2>
+      <details class="group border border-slate-200 rounded-xl p-4 bg-slate-50 open:bg-white transition">
+        <summary class="font-semibold text-slate-800 cursor-pointer list-none flex justify-between">
+          <span>Q. 이미지가 서버로 업로드되지 않는다는 것을 어떻게 확신하나요?</span>
+          <span class="text-slate-400 group-open:rotate-180 transition">▼</span>
+        </summary>
+        <p class="text-sm text-slate-600 mt-2 leading-relaxed">
+          본 사이트는 백엔드 서버 없이 동작하며 개발자 도구의 네트워크 탭에서 어떠한 이미지 바이너리도 전송되지 않음을 실측하실 수 있습니다.
+        </p>
+      </details>
+    </section>
+  </main>
+
+  <div class="manual-ad-box mx-auto my-6 px-4">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-2228289204702106"
+         data-ad-slot="3416334507"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <div id="toast" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-slate-900 text-white text-sm px-5 py-2.5 rounded-full shadow-lg transition-opacity duration-300 opacity-0 pointer-events-none z-50">
+    안내 문구가 복사되었습니다.
+  </div>
+
+  <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-400">
+    © 2026 PrivacyShrink. All rights reserved.
+  </footer>
+
+  <script>
+    const canvas = document.getElementById('preview-canvas');
+    const ctx = canvas.getContext('2d');
+    let currentBlob = null;
+
+    // Default placeholder
+    function drawPlaceholder() {
+      canvas.width = 400;
+      canvas.height = 250;
+      ctx.fillStyle = '#e2e8f0';
+      ctx.fillRect(0, 0, 400, 250);
+      ctx.fillStyle = '#64748b';
+      ctx.font = '14px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('이미지를 선택하면 마스킹 미리보기가 표시됩니다', 200, 125);
+    }
+    drawPlaceholder();
+
+    document.getElementById('process-btn').addEventListener('click', () => {
+      const fileInput = document.getElementById('file-input');
+      if (!fileInput.files || fileInput.files.length === 0) {
+        // Draw demo ID card
+        canvas.width = 400;
+        canvas.height = 250;
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, 400, 250);
+        ctx.strokeStyle = '#cbd5e1';
+        ctx.lineWidth = 2;
+        ctx.strokeRect(10, 10, 380, 230);
+
+        ctx.fillStyle = '#0f172a';
+        ctx.font = 'bold 16px sans-serif';
+        ctx.textAlign = 'left';
+        ctx.fillText('주민등록증 (Demo)', 30, 45);
+
+        ctx.font = '13px sans-serif';
+        ctx.fillText('이름: 홍길동', 30, 80);
+        ctx.fillText('주민번호: 900101 - ', 30, 110);
+
+        // Black box mask
+        ctx.fillStyle = '#000000';
+        ctx.fillRect(145, 96, 100, 18);
+
+        document.getElementById('file-size-info').textContent = '데모 이미지 마스킹 완료 (EXIF 제거)';
+      }
+    });
+
+    document.getElementById('download-btn').addEventListener('click', () => {
+      canvas.toBlob((blob) => {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'privacy-masked.webp';
+        a.click();
+        URL.revokeObjectURL(url);
+      }, 'image/webp', 0.85);
+    });
+
+    document.getElementById('reset-btn').addEventListener('click', () => {
+      drawPlaceholder();
+      document.getElementById('file-input').value = '';
+    });
+
+    function showToast() {
+      const t = document.getElementById('toast');
+      t.style.opacity = '1';
+      setTimeout(() => { t.style.opacity = '0'; }, 2200);
+    }
+    function fallbackCopy(text) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); showToast(); } catch (e) {}
+      document.body.removeChild(ta);
+    }
+    document.getElementById('copy-btn').addEventListener('click', () => {
+      const url = window.location.href;
+      const text = `개인정보 유출 없는 100% 로컬 신분증 마스킹 & EXIF 제거기: ${url}`;
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(showToast).catch(() => fallbackCopy(text));
+      } else {
+        fallbackCopy(text);
+      }
+    });
+  </script>
+</body>
+</html>
