@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>개인정보 안전 마스킹기: 주민번호·계좌·전화번호 비식별화</title>
+  <link>https://privacy-shrink-masking.enjoy-onepage.com/</link>
+  <description>개인정보보호법 컴플라이언스 준수: 외부 서버 전송 0% 순수 브라우저 로컬 정규식 엔진으로 민감 정보를 안전하게 별표(*) 마스킹 처리합니다.</description>
+  <language>ko-kr</language>
+  <atom:link href="https://privacy-shrink-masking.enjoy-onepage.com/rss.xml" rel="self" type="application/rss+xml" />
+  <lastBuildDate>Tue, 29 Sep 2026 06:01:09 +0000</lastBuildDate>
+  <item>
+    <title>이용약관 - 개인정보 안전 마스킹기: 주민번호·계좌·전화번호 비식별화</title>
+    <link>https://privacy-shrink-masking.enjoy-onepage.com/terms.html</link>
+    <guid isPermaLink="true">https://privacy-shrink-masking.enjoy-onepage.com/terms.html</guid>
+    <description>개인정보 안전 마스킹기: 주민번호·계좌·전화번호 비식별화의 서비스 이용약관입니다. 면책 조항 및 서비스 이용 기준을 안내합니다.</description>
+    <pubDate>Mon, 21 Sep 2026 23:09:32 +0900</pubDate>
+  </item>
+  <item>
+    <title>개인정보처리방침 - 개인정보 안전 마스킹기: 주민번호·계좌·전화번호 비식별화</title>
+    <link>https://privacy-shrink-masking.enjoy-onepage.com/privacy.html</link>
+    <guid isPermaLink="true">https://privacy-shrink-masking.enjoy-onepage.com/privacy.html</guid>
+    <description>개인정보 안전 마스킹기: 주민번호·계좌·전화번호 비식별화의 개인정보처리방침입니다. 본 도구는 사용자 데이터를 서버로 전송하지 않습니다.</description>
+    <pubDate>Mon, 21 Sep 2026 23:09:32 +0900</pubDate>
+  </item>
+  <item>
+    <title>개인정보 비식별화 마스킹과 개인정보보호법 실무 컴플라이언스 가이드</title>
+    <link>https://privacy-shrink-masking.enjoy-onepage.com/guides/guide.html</link>
+    <guid isPermaLink="true">https://privacy-shrink-masking.enjoy-onepage.com/guides/guide.html</guid>
+    <description>주민등록번호, 계좌번호, 전화번호, 이메일, 법인등록번호 등 민감 정보를 정규식(Regex) 기반으로 100% 로컬 브라우저에서 안전하게 마스킹 처리하는 원리를 분석합니다.</description>
+    <pubDate>Mon, 21 Sep 2026 22:50:25 +0900</pubDate>
+  </item>
+</channel>
+</rss>
